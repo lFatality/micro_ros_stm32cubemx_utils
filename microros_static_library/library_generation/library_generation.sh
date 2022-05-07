@@ -27,6 +27,12 @@ pushd firmware/mcu_ws > /dev/null
     mkdir extra_packages
     pushd extra_packages > /dev/null
         cp -R $BASE_PATH/library_generation/extra_packages/* .
+        if [ -d $BASE_PATH/../../uros_extra_packages ]; then
+          echo "Found uros_extra_packages"
+          cp -R $BASE_PATH/../../uros_extra_packages/* .
+        else
+          echo "Did not find additional uros_extra_packages, continuing"
+        fi
         vcs import --input extra_packages.repos
     popd > /dev/null
 
